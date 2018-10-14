@@ -1,10 +1,8 @@
 {
-    "development": {
-        "SERVER_IP": "localhost",
-        "SERVER_PORT": "3000",
-        "APP_PORT": "8080",
-        "API_KEY": "85f738c4b28e41689b1a14354acd0eaa",
-        "WEATHER_API": "https://api.weatherbit.io/v2.0/forecast/daily?key=85f738c4b28e41689b1a14354acd0eaa",
-        "CITIES_API": "http://inegifacil.com/cities/26"
-    }
+    "SERVER_IP": "localhost",
+    "SERVER_PORT": "3000",
+    "APP_PORT": "8080",
+    "API_KEY": "85f738c4b28e41689b1a14354acd0eaa",
+    "WEATHER_API": "https://api.weatherbit.io/v2.0/forecast/daily?key=85f738c4b28e41689b1a14354acd0eaa",
+    "CITIES_API": "http://inegifacil.com/cities/26"
 }
