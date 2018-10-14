@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false, 
-  Weather_URL: `http://localhost:${process.env.PORT}`
+  Weather_URL: `http://localhost:3000`
 };
 
 /*

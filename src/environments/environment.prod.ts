@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  Weather_URL: "http://localhost:3000"
+  Weather_URL: `http://localhost:${process.env.PORT}`
 };
