@@ -36,8 +36,12 @@ app.use('/weather', weather);
 /**
  * Starting NodeJS Process
  */
-http.listen(process.env.SERVER_PORT, process.env.SERVER_IP, () => {
-    console.log(`API STARTED ON PORT: ${process.env.SERVER_PORT}`);
+// http.listen(process.env.SERVER_PORT, process.env.SERVER_IP, () => {
+//     console.log(`API STARTED ON PORT: ${process.env.SERVER_PORT}`);
+// });
+
+http.listen(process.env.PORT || process.env.SERVER_PORT, () => {
+    console.log(`API STARTED ON PORT: ${process.env.PORT}`);
 });
 
 // /**
@@ -46,7 +50,7 @@ http.listen(process.env.SERVER_PORT, process.env.SERVER_IP, () => {
 // const app_angular = express();
 
 // app_angular.use(express.static(path.join(__dirname, 'dist/weather-app')));
- 
+
 // app_angular.get('/*', (req, res) => {
 //   res.sendFile(path.join(__dirname + '/dist/weather-app/index.html'));
 // });
