@@ -28,12 +28,12 @@ const weather = require('./src/api/routes/weather');
 app.use('/city', city);
 app.use('/weather', weather);
 
-// app.use(express.static(path.join(__dirname, 'dist/weather-app')));
-// app.get('/*', (req, res) => {
-//     res.sendFile(path.join(__dirname + '/dist/weather-app/index.html'));
-// });
+app.use(express.static(path.join(__dirname, 'dist/weather-app')));
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/dist/weather-app/index.html'));
+});
 
-/**
+/** 
  * Starting NodeJS Process
  */
 // http.listen(process.env.SERVER_PORT, process.env.SERVER_IP, () => {
