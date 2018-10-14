@@ -28,6 +28,11 @@ const weather = require('./src/api/routes/weather');
 app.use('/city', city);
 app.use('/weather', weather);
 
+app.use(express.static(path.join(__dirname, 'dist/weather-app')));
+app.get('/weather-app', (req, res) => {
+    res.sendFile(path.join(__dirname + '/dist/weather-app/index.html'));
+});
+
 /**
  * Starting NodeJS Process
  */
@@ -35,16 +40,16 @@ http.listen(process.env.SERVER_PORT, process.env.SERVER_IP, () => {
     console.log(`API STARTED ON PORT: ${process.env.SERVER_PORT}`);
 });
 
-/**
- * Starting Angular Process 
- */
-const app_angular = express();
+// /**
+//  * Starting Angular Process 
+//  */
+// const app_angular = express();
 
-app_angular.use(express.static(path.join(__dirname, 'dist/weather-app')));
+// app_angular.use(express.static(path.join(__dirname, 'dist/weather-app')));
 
-app_angular.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/dist/weather-app/index.html'));
-});
+// app_angular.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname + '/dist/weather-app/index.html'));
+// });
 
-const server = require("http").createServer(app_angular);
-server.listen(process.env.APP_PORT, () => console.log(`APP STARTED ON PORT: ${process.env.APP_PORT}`));
+// const server = require("http").createServer(app_angular);
+// server.listen(process.env.APP_PORT, () => console.log(`APP STARTED ON PORT: ${process.env.APP_PORT}`));
