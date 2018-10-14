@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+
+ngb-datepicker {
+    width: 100%;
+}
+
+.ngb-dp-month {
+    width: 100%;
+}
+.ngb-dp-weekdays,
+.ngb-dp-week {
+    justify-content: space-evenly;
+} 

@@ -1,0 +1,49 @@
+<div class="float-right col-lg-6">
+  <form [formGroup]="frmWeather" (keydown.enter)="$event.preventDefault()">
+    <div class="form-group col-lg-12">
+      <label class="control-label col-xs-2">City</label>
+      <div class="col-xs-10">
+        <select class="form-control" formControlName='city' (change)="getWeather();">
+          <option *ngFor="let city of cities" [ngValue]="city">{{city.city}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group col-lg-12">
+      <label class="control-label col-xs-2">Scale</label>
+      <div class="col-xs-10">
+        <select class="form-control" formControlName='scale' (change)="getWeather();">
+          <option value="M">Celsius</option>
+          <option value="S">Kelvin</option>
+          <option value="I">Fahrenheit</option>
+        </select>
+      </div>
+    </div>
+  </form> 
+  <div class="col-lg-12">
+    <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next"></ngb-datepicker>
+  </div>
+</div>
+<div class="float-right col-lg-6">
+  <div class="col-lg-12" style="display: block">
+    <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [legend]="chartLegend"
+      [chartType]="chartType"></canvas>
+  </div>
+  <div style="max-height: 300px; overflow-y: auto;">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Max. Temperature</th>
+          <th>Min. Temperature</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of weatherData">
+          <th>{{data.datetime | date: 'dd/MM/yyyy'}}</th>
+          <td>{{data.max_temp}}</td>
+          <td>{{data.min_temp}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
