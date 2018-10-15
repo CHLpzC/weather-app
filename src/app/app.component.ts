@@ -7,6 +7,7 @@ import * as moment from "moment";
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { City } from './shared/models/city';
 import { Weather } from './shared/models/weather';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit {
   /**
    * Calendar properties
    */
-  model: NgbDateStruct;
+  dateModel: NgbDateStruct;
   date: { year: number, month: number };
 
   constructor(private fb: FormBuilder, private objCityService: CityService,
@@ -64,19 +65,37 @@ export class AppComponent implements OnInit {
    * Select today in the calendar
    */
   selectToday() {
-    this.model = this.calendar.getToday();
+    this.dateModel = this.calendar.getToday();
   }
+
+  /**
+  * Get weather info
+  */
+  getWeatherByDate(date) {
+    let weather = this.frmWeather.value;
+    if (weather != null) {
+      let start_date = moment(`${this.dateModel.year}-${this.dateModel.month}-${this.dateModel.day}`).format("YYYY-MM-DD");
+      let end_date = moment(start_date).add(1, "days").format("YYYY-MM-DD");
+
+      this.objWeatherService.getWeatherByDate(weather.city, weather.scale, start_date, end_date).then((weather: [Weather]) => {
+        this.setWeather(weather);
+      });
+    }
+  }
+
 
   /**
    * Clear weather form
    */
   clear() {
-    this.frmWeather.reset({
-      city: this.cities.find(obj => obj.city == "Cd. Obregón"),
-      scale: "M"
-    });
+    if (this.cities != null) {
+      this.frmWeather.reset({
+        city: "Cd.Obregon",
+        scale: "M"
+      });
 
-    this.getWeather();
+      this.getWeather();
+    }
   }
 
   /**
@@ -93,8 +112,8 @@ export class AppComponent implements OnInit {
    */
   getWeather() {
     let weather = this.frmWeather.value;
-    if (weather != null && weather.city != null) {
-      this.objWeatherService.getWeather(weather.city.longitude, weather.city.latitude, weather.scale).then((weather: [Weather]) => {
+    if (weather != null) {
+      this.objWeatherService.getWeather(weather.city, weather.scale).then((weather: [Weather]) => {
         this.setWeather(weather);
       });
     }
@@ -104,9 +123,17 @@ export class AppComponent implements OnInit {
    * Setting values to graph and assigning to table
    * @param weather Weather info
    */
-  setWeather(weather: [Weather]) {
+  setWeather(weather: any) {
+    if (weather.errorMessage != null) {
+      return swal({
+        position: 'top-end',
+        type: 'error',
+        title: weather.errorMessage,
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
     this.weatherData = weather;
-
     this.chartData = [
       { data: [], label: 'Max Temperature' },
       { data: [], label: 'Min Temperature' }

@@ -24,7 +24,7 @@ module.exports = class CityModule {
                 }
 
                 if (objCity.city == "Cajeme") {
-                    objCity.city = "Cd. Obregón";
+                    objCity.city = "Cd.Obregon";
                 }
             });
 
