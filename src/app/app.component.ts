@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
   /**
   * Get weather info
   */
-  getWeatherByDate(date) {
+  getWeatherByDate() {
     let weather = this.frmWeather.value;
     if (weather != null) {
       let start_date = moment(`${this.dateModel.year}-${this.dateModel.month}-${this.dateModel.day}`).format("YYYY-MM-DD");
